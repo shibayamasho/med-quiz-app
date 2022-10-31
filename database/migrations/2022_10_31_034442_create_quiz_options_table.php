@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('quiz_options', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique()->comment('ユーザー名');
-            $table->string('email')->unique()->comment('メールアドレス');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->comment('パスワード');
-            $table->rememberToken();
+            $table->foreign('quiz_id')->references('id')->on('quizzes')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('sentence')->comment('選択肢文章');
+            $table->boolean('correction')->comment('正誤');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('quiz_options');
     }
 };

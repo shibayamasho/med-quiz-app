@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnUpdate();
-            $table->string('description');
+            $table->string('description')->comment('問題文');
             $table->timestamps();
         });
     }
