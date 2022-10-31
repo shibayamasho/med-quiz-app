@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('quiz_options', function (Blueprint $table) {
             $table->id();
-            $table->foreign('quiz_id')->references('id')->on('quizzes')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('quiz_id')->constrained('quizzes')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('sentence')->comment('選択肢文章');
             $table->boolean('correction')->comment('正誤');
             $table->timestamps();
