@@ -23,18 +23,19 @@
         <h1 class="text-3xl ml-4">TOP</h1>
         <p>this is top page.</p>
 
-        <section class="">
-            <div><a href="{{ route('category.edit') }}" class="inline-block bg-green-600 text-white p-2 rounded-lg">新しいカテゴリーを登録</a></div>
+        <section class="flex">
+            <div class="mr-3"><a href="{{ route('category.edit') }}" class="inline-block bg-green-600 text-white p-2 rounded-lg">新しいカテゴリーを登録</a></div>
+            <div><a href="{{ route('quiz.edit') }}" class="inline-block bg-blue-700 text-white p-2 rounded-lg">新しい問題を登録</a></div>
         </section>
 
         <section class="">
             <h2 class="text-2xl">カテゴリー 一覧</h2>
 
-            <div class="grid">
+            <div class="grid grid-cols-3 grid-rows-2">
                 @foreach($categories as $category)
-                    <div class="bg-green-100 w-40">
-                        <h3><?php echo $category->name ?></h3>
-                        <a href="#">問題ページへ</a>
+                    <div class="bg-green-100 p-3 text-center">
+                        <h3 class="mb-2"><?php echo $category->name ?></h3>
+                        <a href="#">> 問題ページへ</a>
                     </div>
                 @endforeach
             </div>

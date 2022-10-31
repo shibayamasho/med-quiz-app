@@ -7,9 +7,9 @@ use App\Models\Category;
 
 class TopController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, Category $categoryModel)
     {
-        $categories = Category::orderBy('created_at', 'DESC')->get();
+        $categories = $categoryModel->getCategories();
         return view('top')->with("categories", $categories);
     }
 }
