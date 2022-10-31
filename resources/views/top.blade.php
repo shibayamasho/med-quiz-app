@@ -24,15 +24,19 @@
         <p>this is top page.</p>
 
         <section class="">
-            <div><a href="" class="inline-block bg-green-600 text-white p-2 rounded-lg">新しいカテゴリーを登録</a></div>
+            <div><a href="{{ route('category.edit') }}" class="inline-block bg-green-600 text-white p-2 rounded-lg">新しいカテゴリーを登録</a></div>
         </section>
 
         <section class="">
             <h2 class="text-2xl">カテゴリー 一覧</h2>
 
-            <div>
-                <h3>HTML<?php // カテゴリー名 ?></h3>
-                <a href="#">問題ページへ</a>
+            <div class="grid">
+                @foreach($categories as $category)
+                    <div class="bg-green-100 w-40">
+                        <h3><?php echo $category->name ?></h3>
+                        <a href="#">問題ページへ</a>
+                    </div>
+                @endforeach
             </div>
 
         </section>

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class TopController extends Controller
 {
     public function index(Request $request)
     {
-        return view('top');
+        $categories = Category::orderBy('created_at', 'DESC')->get();
+        return view('top')->with("categories", $categories);
     }
 }
