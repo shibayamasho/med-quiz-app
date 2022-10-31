@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\QuizzesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,17 @@ require __DIR__.'/auth.php';
 
 // Top Page
 Route::get('/top', [TopController::class, 'index'])->name('top');
-// カテゴリー登録画面
-Route::get('/category/edit',    [CategoriesController::class, 'edit'])->name('category.edit');
-// カテゴリー新規登録
-Route::post('/category/create', [CategoriesController::class, 'create'])->name('category.create');
+
+// ログインしていないと不可にする
+Route::middleware('auth')->group(function(){
+    // カテゴリー登録画面
+    Route::get('/category/edit',    [CategoriesController::class, 'edit'])->name('category.edit');
+    // カテゴリー新規登録
+    Route::post('/category/create', [CategoriesController::class, 'create'])->name('category.create');
+    // 問題登録画面
+    Route::get('/quiz/edit',    [QuizzesController::class, 'edit'])->name('quiz.edit');
+    // 問題新規登録
+    Route::post('/quiz/create', [QuizzesController::class, 'create'])->name('quiz.create');
+});
+
+

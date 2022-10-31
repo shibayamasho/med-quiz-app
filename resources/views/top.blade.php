@@ -23,8 +23,9 @@
         <h1 class="text-3xl ml-4">TOP</h1>
         <p>this is top page.</p>
 
-        <section class="">
-            <div><a href="{{ route('category.edit') }}" class="inline-block bg-green-600 text-white p-2 rounded-lg">新しいカテゴリーを登録</a></div>
+        <section class="flex">
+            <div class="mr-3"><a href="{{ route('category.edit') }}" class="inline-block bg-green-600 text-white p-2 rounded-lg">新しいカテゴリーを登録</a></div>
+            <div><a href="{{ route('quiz.edit') }}" class="inline-block bg-blue-700 text-white p-2 rounded-lg">新しい問題を登録</a></div>
         </section>
 
         <section class="">
