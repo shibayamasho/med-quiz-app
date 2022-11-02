@@ -18,6 +18,7 @@ class QuizzesController extends Controller
         $this->quizService = $quizService;
     }
 
+    // 問題一覧
     public function index(Request $request)
     {
         $categoryId = $request->categoryId;
@@ -25,15 +26,17 @@ class QuizzesController extends Controller
         $quizzes    = $this->quizService->getQuizzesByCategoryId((int) $categoryId);
         return view('quizzes.index')
                 ->with('quizzes', $quizzes)
-                ->with('categoryName', $category->name);
+                ->with('category', $category);
     }
 
+    // 問題登録画面
     public function edit(Request $request, Category $categoryModel)
     {
         $categories = $categoryModel->getCategories();
         return view('quizzes.edit')->with("categories", $categories);
     }
 
+    // 問題登録
     public function create(QuizRequest $request)
     {
         try {
@@ -54,6 +57,17 @@ class QuizzesController extends Controller
         }
 
         return redirect()->route('top');
+    }
+
+    // 問題解答画面
+    public function challenge(Request $request)
+    {
+        $categoryId = $request->categoryId;
+        $category   = $this->quizService->getCategory((int) $categoryId);
+        $quizzes    = $this->quizService->getQuizzesByCategoryId((int) $categoryId);
+        return view('quizzes.challenge')
+                ->with('quizzes', $quizzes)
+                ->with('category', $category);
     }
 
     private function saveQuizOption($quizId, $sentence, $correction)
