@@ -17,26 +17,48 @@
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
         </select>
+        @error('category_id')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
+
         <div>
             <label for="description">問題文</label>
             <input type="text" name="description" placeholder="問題文" class="">
+            @error('description')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
         </div>
 
         <div>
             <label for="sentence_1">選択肢1</label>
             <input type="text" name="sentence_1" placeholder="選択肢1">
+            @error('sentence_1')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
+
             <select name="correction_1" id="">
-                <option value="true">◯</option>
-                <option value="false">×</option>
+                <option value="1">◯</option>
+                <option value="0">×</option>
             </select>
+            @error('correction_1')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
         </div>
+
         <div>
             <label for="sentence_2">選択肢2</label>
             <input type="text" name="sentence_2" placeholder="選択肢2">
+            @error('sentence_2')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
+
             <select name="correction_2" id="">
-                <option value="true">◯</option>
-                <option value="false">×</option>
+                <option value="1">◯</option>
+                <option value="0">×</option>
             </select>
+            @error('correction_2')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
         </div>
 
         <input type="submit" name="submit" value="登録" class="block">

@@ -12,6 +12,9 @@
     <form action="{{ route('category.create') }}" method="post">
         @csrf
         <input type="text" name="category_name" class="inline-block">
+        @error('category_name')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
         <input type="submit" name="submit" value="登録" class="inline-block">
     </form>
 </body>
