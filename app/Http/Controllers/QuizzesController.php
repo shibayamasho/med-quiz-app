@@ -7,9 +7,27 @@ use App\Models\Category;
 use App\Models\Quiz;
 use App\Models\QuizOption;
 use App\Http\Requests\QuizRequest;
+use App\Services\QuizService;
 
 class QuizzesController extends Controller
 {
+    private $quizService;
+
+    function __construct(QuizService $quizService)
+    {
+        $this->quizService = $quizService;
+    }
+
+    public function index(Request $request)
+    {
+        $categoryId = $request->categoryId;
+        $category   = $this->quizService->getCategory((int) $categoryId);
+        $quizzes    = $this->quizService->getQuizzesByCategoryId((int) $categoryId);
+        return view('quizzes.index')
+                ->with('quizzes', $quizzes)
+                ->with('categoryName', $category->name);
+    }
+
     public function edit(Request $request, Category $categoryModel)
     {
         $categories = $categoryModel->getCategories();

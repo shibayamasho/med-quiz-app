@@ -35,8 +35,10 @@ Route::middleware('auth')->group(function(){
     Route::get('/category/edit',    [CategoriesController::class, 'edit'])->name('category.edit');
     // カテゴリー新規登録
     Route::post('/category/create', [CategoriesController::class, 'create'])->name('category.create');
+    // 問題一覧画面
+    Route::get('/quiz/{categoryId}', [QuizzesController::class, 'index'])->name('quiz');
     // 問題登録画面
-    Route::get('/quiz/edit',    [QuizzesController::class, 'edit'])->name('quiz.edit');
+    Route::get('/quiz/edit', [QuizzesController::class, 'edit'])->name('quiz.edit');
     // 問題新規登録
     Route::post('/quiz/create', [QuizzesController::class, 'create'])->name('quiz.create');
 });

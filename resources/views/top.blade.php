@@ -35,7 +35,7 @@
                 @foreach($categories as $category)
                     <div class="bg-green-100 p-3 text-center">
                         <h3 class="mb-2"><?php echo $category->name ?></h3>
-                        <a href="#">> 問題ページへ</a>
+                        <a href="{{ route('quiz', ['categoryId' => $category->id]) }}">> 問題ページへ</a>
                     </div>
                 @endforeach
             </div>
