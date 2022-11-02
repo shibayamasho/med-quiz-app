@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Models\Quiz;
+use App\Models\QuizOption;
 use App\Models\Category;
 
 class QuizService
@@ -28,5 +29,14 @@ class QuizService
     public function getCategory($categoryId)
     {
         return Category::find($categoryId);
+    }
+
+    public function saveQuizOption($quizId, $sentence, $correction)
+    {
+        $quizOption = new QuizOption;
+        $quizOption->quiz_id    = $quizId;
+        $quizOption->sentence   = $sentence;
+        $quizOption->correction = $correction;
+        $quizOption->save();
     }
 }

@@ -48,8 +48,8 @@ class QuizzesController extends Controller
 
             $correction_1 = ($request->correction_1 == 1) ? true : false;
             $correction_2 = ($request->correction_2 == 1) ? true : false;
-            $this->saveQuizOption((int) $quiz->id, $request->sentence_1, $correction_1);
-            $this->saveQuizOption((int) $quiz->id, $request->sentence_2, $correction_2);
+            $this->quizService->saveQuizOption((int) $quiz->id, $request->sentence_1, $correction_1);
+            $this->quizService->saveQuizOption((int) $quiz->id, $request->sentence_2, $correction_2);
         }
         catch (\Exception $e) {
             dd($e);
@@ -70,12 +70,4 @@ class QuizzesController extends Controller
                 ->with('category', $category);
     }
 
-    private function saveQuizOption($quizId, $sentence, $correction)
-    {
-        $quizOption = new QuizOption;
-        $quizOption->quiz_id = $quizId;
-        $quizOption->sentence = $sentence;
-        $quizOption->correction = $correction;
-        $quizOption->save();
-    }
 }

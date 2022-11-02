@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function(){
     // カテゴリー新規登録
     Route::post('/category/create', [CategoriesController::class, 'create'])->name('category.create');
     // 問題一覧画面
-    Route::get('/quiz/{categoryId}', [QuizzesController::class, 'index'])->name('quiz');
+    Route::get('/quiz/index/{categoryId}', [QuizzesController::class, 'index'])->name('quiz.index');
     // 問題登録画面
     Route::get('/quiz/edit', [QuizzesController::class, 'edit'])->name('quiz.edit');
     // 問題新規登録
