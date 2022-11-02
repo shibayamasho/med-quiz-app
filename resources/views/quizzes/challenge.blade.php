@@ -22,7 +22,7 @@
                 {{-- 選択肢 --}}
                 @foreach($quiz->quiz_options as $option)
                     <div class="p-1">
-                        <input type="checkbox" name="sentence_{{ $option->id }}" id="option_{{ $option->correction }}" value="{{ $option->correction }}">
+                        <input type="checkbox" name="sentence_{{ $option->id }}" id="option_{{ $option->id }}" value="{{ $option->correction }}">
                         <label for="sentence_{{ $option->id }}">{{ $option->sentence }}</label>
                     </div>
                 @endforeach
