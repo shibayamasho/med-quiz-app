@@ -41,6 +41,6 @@ Route::middleware('auth')->group(function(){
     Route::get('/quiz/edit', [QuizzesController::class, 'edit'])->name('quiz.edit');
     // 問題新規登録
     Route::post('/quiz/create', [QuizzesController::class, 'create'])->name('quiz.create');
+    // 問題解答画面
+    Route::get('/quiz/challenge/{categoryId}', [QuizzesController::class, 'challenge'])->name('quiz.challenge');
 });
-
-
