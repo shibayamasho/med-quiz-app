@@ -43,4 +43,6 @@ Route::middleware('auth')->group(function(){
     Route::post('/quiz/create', [QuizzesController::class, 'create'])->name('quiz.create');
     // 問題解答画面
     Route::get('/quiz/challenge/{categoryId}', [QuizzesController::class, 'challenge'])->name('quiz.challenge');
+    // 正解表示画面
+    Route::post('/quiz/answer', [QuizzesController::class, 'answer'])->name('quiz.answer');
 });

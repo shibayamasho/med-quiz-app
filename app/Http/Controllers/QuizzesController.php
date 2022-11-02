@@ -70,4 +70,28 @@ class QuizzesController extends Controller
                 ->with('category', $category);
     }
 
+    public function answer(Request $request)
+    {
+        $categoryId = $request->categoryId;
+        //カテゴリーから、問題の選択肢のデータを取ってくる
+        // リクエストから、$request->sentence_XXX（option_id）を抽出する
+        // リクエスト value=1:チェック、value=0:未チェック
+        $quizzes = $this->quizService->getQuizzesByCategoryId((int) $categoryId);
+        $answerArray = []; //正解・不正解を返すarray
+        foreach($quizzes as $quiz) {
+            $answerArray[$quiz->id] = true;
+            foreach($quiz->quiz_options as $option) {
+                $select = (int)$request['sentence_' . $option->id];
+                $correctAnswer = (int)$option->correction;
+                if ($select === $correctAnswer) {
+                    // dump('正解');
+                } else {
+                    $answerArray[$quiz->id] = false;
+                    // dump('はずれ');
+                }
+            }
+        }
+        dd($answerArray);
+        // TODO 正解不正解をviewに表示
+    }
 }
