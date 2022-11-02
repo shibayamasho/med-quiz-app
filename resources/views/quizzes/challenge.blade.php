@@ -7,7 +7,7 @@
     <title>問題</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body id="quizChallenge">
     <h1 class="bg-green-400">問題</h1>
     <div>カテゴリー：{{ $category->name }}</div>
 
@@ -22,11 +22,13 @@
                 {{-- 選択肢 --}}
                 @foreach($quiz->quiz_options as $option)
                     <div class="p-1">
-                        <input type="checkbox" name="sentence_{{ $option->id }}" id="">
+                        <input type="checkbox" name="sentence_{{ $option->id }}" id="option_{{ $option->correction }}" value="{{ $option->correction }}">
                         <label for="sentence_{{ $option->id }}">{{ $option->sentence }}</label>
                     </div>
                 @endforeach
-                <button class="p-1 bg-green-400">解答する</button>
+                {{-- <button v-on:click="answer('')" class="p-1 bg-green-400">解答する</button>
+                <div v-show="correctAnswer">正解</div>
+                <div v-show="incorrectAnswer">はずれ</div> --}}
             </div>
         @endforeach
 
