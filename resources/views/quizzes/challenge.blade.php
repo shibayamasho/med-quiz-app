@@ -14,7 +14,7 @@
     @if (count($quizzes) > 0)
 
         <p>問題数：{{ count($quizzes) }}</p>
-        <form action="{{ route('quiz.answer', ['categoryId' => $category->id]) }}" method="post">
+        <form action="{{ route('quiz.answer') }}" method="post">
             @csrf
             @foreach($quizzes as $quiz)
                 <div class="p-2">
