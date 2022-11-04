@@ -80,6 +80,18 @@ class QuizzesController extends Controller
                 ->with('category', $category);
     }
 
+    // ランダムに挑戦
+    public function randomChallenge(Request $request)
+    {
+        $count = 1; // 問題数
+        $categoryId = $request->categoryId;
+        $category   = $this->quizService->getCategory((int) $categoryId);
+        $quizzes    = $this->quizService->getRandomQuizzes((int) $categoryId, $count);
+        return view('quizzes.challenge')
+                ->with('quizzes', $quizzes)
+                ->with('category', $category);
+    }
+
     public function answer(Request $request)
     {
         $categoryId = $request->categoryId;
