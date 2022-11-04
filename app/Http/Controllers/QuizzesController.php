@@ -40,16 +40,26 @@ class QuizzesController extends Controller
     public function create(QuizRequest $request)
     {
         try {
+            // 問題文を登録
             $quiz = new Quiz;
             $quiz->user_id     = $request->user()->id;
             $quiz->category_id = $request->category_id;
             $quiz->description = $request->description;
             $quiz->save();
 
+            // 問題の選択肢を登録
             $correction_1 = ($request->correction_1 == 1) ? true : false;
             $correction_2 = ($request->correction_2 == 1) ? true : false;
             $this->quizService->saveQuizOption((int) $quiz->id, $request->sentence_1, $correction_1);
             $this->quizService->saveQuizOption((int) $quiz->id, $request->sentence_2, $correction_2);
+            if ($request->choices >= 3) {
+                $correction_3 = ($request->correction_3 == 1) ? true : false;
+                $this->quizService->saveQuizOption((int) $quiz->id, $request->sentence_3, $correction_3);
+            }
+            if ($request->choices >= 4) {
+                $correction_4 = ($request->correction_4 == 1) ? true : false;
+                $this->quizService->saveQuizOption((int) $quiz->id, $request->sentence_4, $correction_4);
+            }
         }
         catch (\Exception $e) {
             dd($e);

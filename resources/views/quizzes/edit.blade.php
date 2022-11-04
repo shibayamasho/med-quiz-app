@@ -7,7 +7,7 @@
     <title>問題登録</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body id="app">
     <h1 class="">問題登録</h1>
     <form action="{{ route('quiz.create') }}" method="post">
         @csrf
@@ -30,13 +30,20 @@
         </div>
 
         <div>
+            <label for="choices">選択肢の数</label>
+            <input type="radio" name="choices" value="2" v-model="choices" checked><label>2</label>
+            <input type="radio" name="choices" value="3" v-model="choices"><label>3</label>
+            <input type="radio" name="choices" value="4" v-model="choices"><label>4</label>
+        </div>
+
+        <div>
             <label for="sentence_1">選択肢1</label>
             <input type="text" name="sentence_1" placeholder="選択肢1">
             @error('sentence_1')
                 <p style="color: red;">{{ $message }}</p>
             @enderror
 
-            <select name="correction_1" id="">
+            <select name="correction_1">
                 <option value="1">◯</option>
                 <option value="0">×</option>
             </select>
@@ -52,7 +59,7 @@
                 <p style="color: red;">{{ $message }}</p>
             @enderror
 
-            <select name="correction_2" id="">
+            <select name="correction_2">
                 <option value="1">◯</option>
                 <option value="0">×</option>
             </select>
@@ -61,6 +68,38 @@
             @enderror
         </div>
 
-        <input type="submit" name="submit" value="登録" class="block">
+        <div v-if="(choices >= 3)">
+            <label for="sentence_3">選択肢3</label>
+            <input type="text" name="sentence_3" placeholder="選択肢3">
+            @error('sentence_3')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
+
+            <select name="correction_3">
+                <option value="1">◯</option>
+                <option value="0">×</option>
+            </select>
+            @error('correction_3')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div v-if="(choices >= 4)">
+            <label for="sentence_4">選択肢4</label>
+            <input type="text" name="sentence_4" placeholder="選択肢4">
+            @error('sentence_4')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
+
+            <select name="correction_4">
+                <option value="1">◯</option>
+                <option value="0">×</option>
+            </select>
+            @error('correction_4')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <input type="submit" name="submit" value="登録" class="block bg-green-600 text-white">
     </form>
 </body>
