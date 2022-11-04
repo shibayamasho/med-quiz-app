@@ -70,4 +70,29 @@ class QuizzesController extends Controller
                 ->with('category', $category);
     }
 
+    public function answer(Request $request)
+    {
+        $categoryId = $request->categoryId;
+        $category   = $this->quizService->getCategory((int) $categoryId);
+        $quizzes = $this->quizService->getQuizzesByCategoryId((int) $categoryId);
+        $answerArray = []; //正解・不正解を返すarray
+        foreach($quizzes as $quiz) {
+            $answerArray[$quiz->id] = true;
+            foreach($quiz->quiz_options as $option) {
+                $select = (int)$request['sentence_' . $option->id];
+                $correctAnswer = (int)$option->correction;
+                if ($select === $correctAnswer) {
+                    // 正解
+                } else {
+                    // 不正解
+                    $answerArray[$quiz->id] = false;
+                }
+            }
+        }
+        // TODO 正解不正解をviewに表示
+        return view('quizzes.answer')
+                ->with('quizzes', $quizzes)
+                ->with('answers', $answerArray)
+                ->with('category', $category);
+    }
 }
