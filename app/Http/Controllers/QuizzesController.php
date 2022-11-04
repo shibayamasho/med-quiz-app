@@ -86,7 +86,10 @@ class QuizzesController extends Controller
         $count = 1; // 問題数
         $categoryId = $request->categoryId;
         $category   = $this->quizService->getCategory((int) $categoryId);
-        $quizzes    = $this->quizService->getRandomQuizzes((int) $categoryId, $count);
+        // 問題IDをランダムに抽出
+        $quizIds = $this->quizService->getRandomQuizIds((int) $categoryId, $count);
+        // 問題IDから問題を取得
+        $quizzes = $this->quizService->getRandomQuizzes((int) $categoryId, $quizIds);
         return view('quizzes.challenge')
                 ->with('quizzes', $quizzes)
                 ->with('category', $category);
@@ -94,9 +97,10 @@ class QuizzesController extends Controller
 
     public function answer(Request $request)
     {
+        // TODO ランダムの時の答え画面対応
         $categoryId = $request->categoryId;
         $category   = $this->quizService->getCategory((int) $categoryId);
-        $quizzes = $this->quizService->getQuizzesByCategoryId((int) $categoryId);
+        $quizzes    = $this->quizService->getQuizzesByCategoryId((int) $categoryId);
         $answerArray = []; //正解・不正解を返すarray
         foreach($quizzes as $quiz) {
             $answerArray[$quiz->id] = true;

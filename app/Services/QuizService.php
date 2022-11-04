@@ -40,35 +40,30 @@ class QuizService
         $quizOption->save();
     }
 
+    public function getRandomQuizIds($categoryId, $count)
+    {
+        $quizIds = Quiz::where('category_id', $categoryId)->pluck('id')->toArray();
+        $randomIdsKeys = array_rand($quizIds, $count);
+        $randomIds = [];
+        if (is_array($randomIdsKeys)) {
+            foreach($randomIdsKeys as $key) {
+                $randomIds[] = $quizIds[$key];
+            }
+        } else {
+            $randomIds[] = $quizIds[$randomIdsKeys];
+        }
+        return $randomIds;
+    }
+
     // ランダムに問題を抽出
-    public function getRandomQuizzes($categoryId, $count)
+    public function getRandomQuizzes($categoryId, $quizIds)
     {
         $quizzes = [];
-
-        if ($categoryId && $count > 0) {
-            $quizIds = Quiz::where('category_id', $categoryId)->pluck('id')->toArray();
-            $randomIdsKeys = array_rand($quizIds, $count);
-            $randomIds = [];
-
-            if (is_array($randomIdsKeys)) {
-                foreach($randomIdsKeys as $key) {
-                    $randomIds[] = $quizIds[$key];
-                }
-            } else {
-                $randomIds[] = $quizIds[$randomIdsKeys];
-            }
-
-            if (count($randomIds) >= 2) {
-                $quizzes = Quiz::where('category_id', $categoryId)
-                            ->whereIn('id', $randomIds)
-                            ->get();
-            } elseif (count($randomIds) == 1) {
-                $quizzes = Quiz::where('category_id', $categoryId)
-                            ->where('id', $randomIds)
-                            ->get();
-            }
+        if ($categoryId && count($quizIds) > 0) {
+            $quizzes = Quiz::where('category_id', $categoryId)
+                        ->whereIn('id', $quizIds)
+                        ->get();
         }
-
         return $quizzes;
     }
 }
