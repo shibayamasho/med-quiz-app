@@ -23,11 +23,20 @@ class QuizRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $data    = $this->all();
+        $choices = $data['choices'];
+        return $this->getRules($choices);
+    }
+
+    private function getRules($choices)
+    {
+        $rules = [
             // カテゴリー
             'category_id'  => ['required'],
             // 問題文
             'description'  => ['required', 'max:500', 'unique:quizzes'],
+            // 選択肢の数
+            'choices'      => ['required', 'integer', 'max:4', 'min:2'],
             // 選択肢1
             'sentence_1'   => ['required', 'max:200'],
             // 選択肢1の正誤
@@ -37,5 +46,16 @@ class QuizRequest extends FormRequest
             // 選択肢2の正誤
             'correction_2' => ['required', 'integer', 'max:1', 'min:0'],
         ];
+
+        if ($choices >= 3) {
+            $rules['sentence_3']   = ['required', 'max:200'];
+            $rules['correction_3'] = ['required', 'integer', 'max:1', 'min:0'];
+        }
+        if ($choices >= 4) {
+            $rules['sentence_4']   = ['required', 'max:200'];
+            $rules['correction_4'] = ['required', 'integer', 'max:1', 'min:0'];
+        }
+
+        return $rules;
     }
 }

@@ -100,9 +100,6 @@
             @enderror
         </div>
 
-
-
-        <input type="submit" name="submit" value="登録" class="block">
+        <input type="submit" name="submit" value="登録" class="block bg-green-600 text-white">
     </form>
-    <div>@{{ this.val }}</div>
 </body>
