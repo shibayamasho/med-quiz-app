@@ -89,9 +89,16 @@ class QuizzesController extends Controller
     {
         // セッションを消しておく
         $request->session()->forget('quizIds');
-        $count = 1; // 問題数
         $categoryId = $request->categoryId;
-        $category   = $this->quizService->getCategory((int) $categoryId);
+        // カテゴリーの問題数を取得
+        $quizCount   = $this->quizService->getQuizCountByCategory((int)$categoryId);
+        // 問題数が５未満の場合は問題数すべて
+        if ($quizCount < 5) {
+            $count = $quizCount;
+        } else { // 問題数５以上ある場合は５個
+            $count = 5;
+        }
+        $category = $this->quizService->getCategory((int) $categoryId);
         // 問題IDをランダムに抽出
         $quizIds = $this->quizService->getRandomQuizIds((int) $categoryId, $count);
         // $quizIds セッションに保存しておく

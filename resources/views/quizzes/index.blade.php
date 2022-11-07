@@ -11,10 +11,6 @@
     <h1 class="bg-green-400">{{ $category->name }}</h1>
     <p>問題数：{{ count($quizzes) }}</p>
     <a href="{{ route('quiz.challenge', ['categoryId' => $category->id]) }}" class="bg-blue-400 text-white">問題に挑戦</a>
-    <a href="{{ route('quiz.randomChallenge', ['categoryId' => $category->id]) }}" class="bg-blue-400 text-white">ランダムに挑戦</a>
-    @foreach($quizzes as $quiz)
-        <div>問題番号：{{ $quiz->id }}</div>
-    @endforeach
-
+    <a href="{{ route('quiz.randomChallenge', ['categoryId' => $category->id]) }}" class="bg-blue-400 text-white">ランダムに挑戦（最大５問）</a>
     <a href="{{ route('top') }}" class="bg-green-400">TOP</a>
 </body>
