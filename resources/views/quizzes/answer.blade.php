@@ -31,6 +31,6 @@
         </div>
     @endforeach
 
-    <a href="{{ route('quiz.challenge', ['categoryId' => $category->id]) }}" class="bg-blue-400 text-white">もう一度挑戦する</a>
+    <a href="{{ route('quiz.index', ['categoryId' => $category->id]) }}" class="bg-blue-400 text-white">カテゴリーに戻る</a>
     <a href="{{ route('top') }}" class="bg-green-400">TOP</a>
 </body>

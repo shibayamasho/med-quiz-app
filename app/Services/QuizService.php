@@ -56,7 +56,7 @@ class QuizService
     }
 
     // ランダムに問題を抽出
-    public function getRandomQuizzes($categoryId, $quizIds)
+    public function getQuizzesByIds($categoryId, $quizIds)
     {
         $quizzes = [];
         if ($categoryId && count($quizIds) > 0) {
