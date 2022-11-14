@@ -1,45 +1,62 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>med-quiz</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body>
-    <header class="h-24 bg-green-400 flex justify-between">
-        <div class="bg-blue-100 p-3 flex items-center">LOGO</div>
-        <ul class="flex">
-            <li class="bg-blue-100 m-1 p-3 flex items-center"><a href="">menu1</a></li>
-            <li class="bg-blue-100 m-1 p-3 flex items-center"><a href="">menu2</a></li>
-            <li class="bg-blue-100 m-1 p-3 flex items-center"><a href="">menu3</a></li>
-            <li class="bg-blue-100 m-1 p-3 flex items-center">user name<?php // ユーザー名 ?></li>
-        </ul>
-    </header>
+@extends('adminlte::page')
 
-    <main class="w-8/12 bg-blue-200 space-x-4">
+@section('title', 'med-quiz')
 
-        <section class="flex">
-            <div class="mr-3"><a href="{{ route('category.edit') }}" class="inline-block bg-green-600 text-white p-2 rounded-lg">新しいカテゴリーを登録</a></div>
-            <div><a href="{{ route('quiz.edit') }}" class="inline-block bg-blue-700 text-white p-2 rounded-lg">新しい問題を登録</a></div>
-        </section>
+@section('content_header')
+    <h1>カテゴリー 一覧</h1>
+@stop
 
-        <section class="">
-            <h2 class="text-2xl">カテゴリー 一覧</h2>
+@section('content')
 
-            <div class="grid grid-cols-3 grid-rows-2">
-                @foreach($categories as $category)
-                    <div class="bg-green-100 p-3 text-center">
-                        <h3 class="mb-2"><?php echo $category->name ?></h3>
-                        <a href="{{ route('quiz.index', ['categoryId' => $category->id]) }}">> 問題ページへ</a>
+    <section class="flex mb-4">
+        <div class="mr-3"><a href="{{ route('category.edit') }}" class="inline-block bg-green-600 text-white p-2 rounded-lg">新しいカテゴリーを登録</a></div>
+        <div><a href="{{ route('quiz.edit') }}" class="inline-block bg-blue-700 text-white p-2 rounded-lg">新しい問題を登録</a></div>
+    </section>
+
+    <section class="">
+        <div class="row">
+            @foreach($categories as $category)
+                <div class="col-md-4">
+                    <a class="block" href="{{ route('quiz.index', ['categoryId' => $category->id]) }}">
+                    <!-- Widget: user widget style 1 -->
+                    <div class="card card-widget widget-user shadow-lg">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header bg-info">
+                            <h3 class="widget-user-username">{{ $category->name }}</h3>
+                            {{-- <h5 class="widget-user-desc"></h5> --}}
+                        </div>
+                        <div class="widget-user-image">
+                            <img class="img-circle" src="assets/img/icon_html128.jpeg" alt="User Avatar">
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="description-block">
+                                        <h5 class="description-header"></h5>
+                                        <span class="description-text"></span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                        </div>
                     </div>
-                @endforeach
-            </div>
+                    <!-- /.widget-user -->
+                </a>
+                </div>
+            @endforeach
+        </div>
+    </section>
 
-        </section>
+@stop
 
-    </main>
+@section('css')
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- ページごとCSSの指定
+    <link rel="stylesheet" href="/css/xxx.css">
+    --}}
+@stop
 
-</body>
-</html>
+@section('js')
+    {{-- <script> console.log('ページごとJSの記述'); </script> --}}
+@stop
