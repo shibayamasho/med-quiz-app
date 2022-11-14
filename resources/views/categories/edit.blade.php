@@ -1,20 +1,35 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>カテゴリー登録</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body>
+@extends('adminlte::page')
+
+@section('title', 'カテゴリー登録')
+
+@section('content_header')
     <h1>カテゴリー登録</h1>
+@stop
+
+@section('content')
+
+<div>
     <form action="{{ route('category.create') }}" method="post">
         @csrf
-        <input type="text" name="category_name" class="inline-block">
-        @error('category_name')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
-        <input type="submit" name="submit" value="登録" class="inline-block">
+
+        <div class="form-group col-sm-6">
+            <label for="category_name">カテゴリー名</label>
+            <input type="text" name="category_name" class="form-control" placeholder="カテゴリー名を入力してください">
+            @error('category_name')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <input type="submit" class="btn btn-primary" name="submit" value="登録">
     </form>
-</body>
+</div>
+
+@stop
+
+@section('css')
+
+@stop
+
+@section('js')
+
+@stop
