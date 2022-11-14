@@ -16,9 +16,10 @@ use App\Http\Controllers\QuizzesController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Welcomeページ非表示
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,7 +28,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 // Top Page
-Route::get('/top', [TopController::class, 'index'])->name('top');
+Route::get('/', [TopController::class, 'index'])->name('top');
 
 // ログインしていないと不可にする
 Route::middleware('auth')->group(function(){
@@ -47,4 +48,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/quiz/randomChallenge/{categoryId}', [QuizzesController::class, 'randomChallenge'])->name('quiz.randomChallenge');
     // 正解表示画面
     Route::post('/quiz/answer', [QuizzesController::class, 'answer'])->name('quiz.answer');
+});
+
+// AdminLTE テンプレ表示
+Route::get('adminlte', function () {
+    return view('adminlte_template');
 });
