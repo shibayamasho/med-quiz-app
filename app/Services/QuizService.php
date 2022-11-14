@@ -66,4 +66,9 @@ class QuizService
         }
         return $quizzes;
     }
+
+    public function getQuizCountByCategory($categoryId)
+    {
+        return Quiz::where('category_id', $categoryId)->count();
+    }
 }
