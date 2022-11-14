@@ -1,20 +1,32 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>問題一覧</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body>
-    <h1 class="bg-green-400">{{ $category->name }}</h1>
+@extends('adminlte::page')
+
+@section('title', '問題一覧')
+
+@section('content_header')
+    <h1>{{ $category->name }}</h1>
+@stop
+
+@section('content')
+
     @if (count($quizzes))
-        <p>問題数：{{ count($quizzes) }}</p>
-        <a href="{{ route('quiz.challenge', ['categoryId' => $category->id]) }}" class="bg-blue-400 text-white">問題に挑戦</a>
-        <a href="{{ route('quiz.randomChallenge', ['categoryId' => $category->id]) }}" class="bg-blue-400 text-white">ランダムに挑戦（最大５問）</a>
+        <h3>問題数：{{ count($quizzes) }}</h3>
+
+        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('quiz.challenge', ['categoryId' => $category->id]) }}'">問題に挑戦</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('quiz.randomChallenge', ['categoryId' => $category->id]) }}'">ランダムに挑戦（最大５問）</button>
     @else
         <p>問題はまだ登録されていません</p>
     @endif
-    <a href="{{ route('top') }}" class="bg-green-400">TOP</a>
-</body>
+    <button type="button" class="btn btn-default" onclick="location.href='{{ route('top') }}'">TOP</button>
+
+@stop
+
+@section('css')
+{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    {{-- ページごとCSSの指定
+    <link rel="stylesheet" href="/css/xxx.css">
+    --}}
+@stop
+
+@section('js')
+    {{-- <script> console.log('ページごとJSの記述'); </script> --}}
+@stop
