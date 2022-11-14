@@ -9,8 +9,8 @@
 @section('content')
 
     <section class="flex mb-4">
-        <div class="mr-3"><a href="{{ route('category.edit') }}" class="inline-block bg-green-600 text-white p-2 rounded-lg">新しいカテゴリーを登録</a></div>
-        <div><a href="{{ route('quiz.edit') }}" class="inline-block bg-blue-700 text-white p-2 rounded-lg">新しい問題を登録</a></div>
+        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('category.edit') }}'">新しいカテゴリーを登録</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='{{ route('quiz.edit') }}'">新しい問題を登録</button>
     </section>
 
     <section class="">
@@ -51,7 +51,7 @@
 @stop
 
 @section('css')
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     {{-- ページごとCSSの指定
     <link rel="stylesheet" href="/css/xxx.css">
     --}}
